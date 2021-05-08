@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+header{
+    margin-top : 20px;
+    padding-bottom : 20px;
+    border-bottom: 2px ghostwhite solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+}
+section{
+    border-top: 1px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a.logo{
+    font-size: 30px;
+    text-decoration: none;
+}
+.editor{
+    overflow: scroll;
+    position: relative;
+    width: 600px;
+    height: 600px;
+    padding: 16px;
+    background-color: #f6f8fa;
+    border-radius: 6px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree-Generator</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <header>
+            <a class="logo" href="https://github.com/iqeq1945">Tree-Generator</a>
+    </header>
+    <section>
+    <div>
+        <form action="/" method="post">
+            <p>
+                <label for="url">Github Url</label>
+                <input type="text" id="url" name="url">
+                <label for="branch">Branch</label>
+                <input type="text" id="branch" name="branch">
+                <input type="submit" value="submit" >
+            </p>    
+        </form>
+        <div id="tree" class="editor">
+            <span>🍀</span>
+        </div>
+    </div>
+</section>
+</body>
+<script>
+    var content = JSON.parse('<%- data %>');
+    var tree = content.tree.map(function(element,index){
+        const depth = element.path.split('/');
+        //console.log(depth);
+        const textIndex = depth.length;
+        //console.log(textIndex);
+        return {
+              id: index + 1,
+              depth: textIndex,
+              text: depth[textIndex - 1],
+        };
+    });
+    function setTree(){
+        const element = document.getElementById('tree');
+        tree.forEach(function(data,index){
+            if(data.depth)
+            element.innerHTML += `<div>${data.text}<div/>`
+        })
+    }
+    if(tree) setTree();
+</script>
+</html>
