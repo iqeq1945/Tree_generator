@@ -3,14 +3,15 @@ var router = express.Router();
 const fetch = require("node-fetch");
 
 router.get('/', function(req, res){
-    res.render('main', {'data' : ''});
+    res.render('main', {'data' : '' , 'folder' : ''});
  });
 
 router.post('/', async function(req, res){
     var url= req.body.url;
     var branch=req.body.branch;
     const data = await fetchData(url,branch);
-    res.render('main', {'data' : JSON.stringify(data)});
+    var folder = url.split('/')[1];
+    res.render('main', {'data' : JSON.stringify(data), 'folder':folder});
 });
 
 module.exports = router;

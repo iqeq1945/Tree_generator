@@ -20,6 +20,14 @@ section{
     align-items: center;
     justify-content: center;
 }
+.button{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+#author{
+    font-size: 12px;
+}
 a.logo{
     font-size: 30px;
     text-decoration: none;
@@ -32,4 +40,5 @@ a.logo{
     padding: 16px;
     background-color: #f6f8fa;
     border-radius: 6px;
+    font-size: 15px;
 }

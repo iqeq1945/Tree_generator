@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="/js/html2canvas.js"></script>
 </head>
 <body>
     <header>
@@ -15,17 +17,26 @@
     </header>
     <section>
     <div>
+        <h2>Make a Folder Tree!</h2>
         <form action="/" method="post">
             <p>
                 <label for="url">Github Url</label>
-                <input type="text" id="url" name="url">
+                <input type="text" id="url" name="url" placeholder="{ID}/{Repository}">
                 <label for="branch">Branch</label>
-                <input type="text" id="branch" name="branch">
+                <input type="text" id="branch" name="branch" placeholder="{branch}">
                 <input type="submit" value="submit" >
+                
             </p>    
         </form>
+        <p class="button">
+            <span> <button onclick="PrintDiv($('#tree'));">Image</button>
+                <button onclick="location.href='https://github.com/iqeq1945/Tree_generator'">Github</button></span>
+           
+            <span id="author">made by Seongwoong-Hong</span>
+        </p>
+       
         <div id="tree" class="editor">
-            <span>🍀</span>
+            <span>📑</span>
         </div>
     </div>
 </section>
@@ -43,13 +54,38 @@
               text: depth[textIndex - 1],
         };
     });
+    var treeDepth=tree.length;
     function setTree(){
         const element = document.getElementById('tree');
+        element.innerHTML+=`<span><%= folder %></span><br>`;
         tree.forEach(function(data,index){
-            if(data.depth)
-            element.innerHTML += `<div>${data.text}<div/>`
-        })
-    }
+            var space = "\u00A0\u00A0\u00A0";
+            for(i=1; i<data.depth ;i++){
+                space+='│';
+                space+=`\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0`;
+
+            }
+            space+='└─';
+            element.innerHTML += `${space}${data.text}<br>`;
+            })
+        }
     if(tree) setTree();
+</script>
+<script>
+    function PrintDiv(div){
+        console.log("다운로드");
+	div = div[0]
+	html2canvas(div).then(function(canvas){
+		var myImage = canvas.toDataURL();
+		downloadURI(myImage, "tree.png") 
+	});
+}
+    function downloadURI(uri, name){
+	var link = document.createElement("a")
+	link.download = name;
+	link.href = uri;
+	document.body.appendChild(link);
+	link.click();
+}
 </script>
 </html>
